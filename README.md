@@ -4,19 +4,19 @@ A reference implementation of a binary search tree in c.
 
 ## API
 
-### `init_hc_bst() -> hc_bst*`
+### `hc_bst_init() -> hc_bst*`
 
 Initialize a BST for usage.
 
-### `destroy_hc_bst(hc_bst**) -> void`
+### `hc_bst_destroy(hc_bst**) -> void`
 
 Destroy a BST.
 
-### `insert_into_hc_bst(hc_bst* t, const char* k, const char* v) -> void`
+### `hc_bst_insert(hc_bst* t, const char* k, const char* v) -> void`
 
 Insert into a BST `t` a node with key `k` and value `v`.
 
-### `print_hc_bst(hc_bst* t) -> void`
+### `hc_bst_print(hc_bst* t) -> void`
 
 Print the contents of a BST `t`.
 

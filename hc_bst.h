@@ -7,12 +7,12 @@ typedef struct hc_bst {
     hc_bst_node* root;
 } hc_bst;
 
-hc_bst* init_hc_bst();
+hc_bst* hc_bst_init();
 
-void insert_into_hc_bst(hc_bst* t, const char* k, const char* v);
+void hc_bst_insert(hc_bst* t, const char* k, const char* v);
 
-void print_hc_bst(hc_bst* t);
+void hc_bst_print(hc_bst* t);
 
-void destroy_hc_bst(hc_bst** t);
+void hc_bst_destroy(hc_bst** t);
 
 #endif

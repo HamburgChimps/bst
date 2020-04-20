@@ -8,8 +8,8 @@ typedef struct hc_bst_node {
     const char* value;
 } hc_bst_node;
 
-hc_bst_node* init_hc_bst_node(const char* k, const char* v);
+hc_bst_node* hc_bst_node_init(const char* k, const char* v);
 
-void destroy_hc_bst_node(hc_bst_node** n);
+void hc_bst_node_destroy(hc_bst_node** n);
 
 #endif

@@ -6,34 +6,34 @@
 
 #include "hc_bst_node.h"
 
-hc_bst* init_hc_bst() {
+hc_bst* hc_bst_init() {
     hc_bst* tree = malloc(sizeof(hc_bst));
     tree->root = NULL;
     return tree;
 }
 
-static void insert_into_hc_bst_worker(hc_bst_node** nref, const char* k,
-                                      const char* v) {
+static void hc_bst_insert_worker(hc_bst_node** nref, const char* k,
+                                 const char* v) {
     if (*nref == NULL) {
-        *nref = init_hc_bst_node(k, v);
+        *nref = hc_bst_node_init(k, v);
         return;
     }
 
     if (strcmp(k, (*nref)->key) < 0) {
-        insert_into_hc_bst_worker(&(*nref)->left, k, v);
+        hc_bst_insert_worker(&(*nref)->left, k, v);
         return;
     }
 
     if (strcmp(k, (*nref)->key) > 0) {
-        insert_into_hc_bst_worker(&(*nref)->right, k, v);
+        hc_bst_insert_worker(&(*nref)->right, k, v);
     }
 }
 
-void insert_into_hc_bst(hc_bst* t, const char* k, const char* v) {
-    insert_into_hc_bst_worker(&t->root, k, v);
+void hc_bst_insert(hc_bst* t, const char* k, const char* v) {
+    hc_bst_insert_worker(&t->root, k, v);
 }
 
-static void print_hc_bst_worker(hc_bst_node* n, const char* node_addr) {
+static void hc_bst_print_worker(hc_bst_node* n, const char* node_addr) {
     if (n == NULL) {
         return;
     }
@@ -47,22 +47,22 @@ static void print_hc_bst_worker(hc_bst_node* n, const char* node_addr) {
     char* left_node_addr = malloc(120 * sizeof(char));
     strcpy(left_node_addr, node_addr);
     strcat(left_node_addr, "->left");
-    print_hc_bst_worker(n->left, left_node_addr);
+    hc_bst_print_worker(n->left, left_node_addr);
     free(left_node_addr);
     left_node_addr = NULL;
 
     char* right_node_addr = malloc(120 * sizeof(char));
     strcpy(right_node_addr, node_addr);
     strcat(right_node_addr, "->right");
-    print_hc_bst_worker(n->right, right_node_addr);
+    hc_bst_print_worker(n->right, right_node_addr);
     free(right_node_addr);
     right_node_addr = NULL;
 }
 
-void print_hc_bst(hc_bst* t) { print_hc_bst_worker(t->root, "root"); }
+void hc_bst_print(hc_bst* t) { hc_bst_print_worker(t->root, "root"); }
 
-void destroy_hc_bst(hc_bst** t) {
-    destroy_hc_bst_node(&(*t)->root);
+void hc_bst_destroy(hc_bst** t) {
+    hc_bst_node_destroy(&(*t)->root);
     free(*t);
     *t = NULL;
 }
