@@ -19,13 +19,13 @@ static void hc_bst_insert_worker(hc_bst_node** nref, const char* k,
         return;
     }
 
-    if (strcmp(k, (*nref)->key) < 0) {
-        hc_bst_insert_worker(&(*nref)->left, k, v);
-        return;
+    int cmp_res = strcmp(k, (*nref)->key);
+    if (cmp_res < 0) {
+        return hc_bst_insert_worker(&(*nref)->left, k, v);
     }
 
-    if (strcmp(k, (*nref)->key) > 0) {
-        hc_bst_insert_worker(&(*nref)->right, k, v);
+    if (cmp_res > 0) {
+        return hc_bst_insert_worker(&(*nref)->right, k, v);
     }
 }
 
@@ -33,10 +33,25 @@ void hc_bst_insert(hc_bst* t, const char* k, const char* v) {
     hc_bst_insert_worker(&t->root, k, v);
 }
 
+static const char* hc_bst_get_worker(hc_bst_node* n, const char* k) {
+    if (n == NULL) return NULL;
+
+    int cmp_res = strcmp(k, n->key);
+    if (cmp_res == 0) return n->value;
+    if (cmp_res < 0) return hc_bst_get_worker(n->left, k);
+    if (cmp_res > 0) return hc_bst_get_worker(n->right, k);
+
+    return NULL;
+}
+
+const char* hc_bst_get(hc_bst* t, const char* k) {
+    if (k == NULL) return NULL;
+
+    return hc_bst_get_worker(t->root, k);
+}
+
 static void hc_bst_print_worker(hc_bst_node* n, const char* node_addr) {
-    if (n == NULL) {
-        return;
-    }
+    if (n == NULL) return;
 
     printf("Node: %s\n", node_addr);
     printf("Key: %s\n", n->key);

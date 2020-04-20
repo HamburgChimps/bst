@@ -15,5 +15,8 @@ int main() {
     hc_bst_insert(tree, "translator", "Constance Garnett");
     hc_bst_insert(tree, "taco truck", "Sweeto Burrito");
     hc_bst_print(tree);
+    printf("%s\n", hc_bst_get(tree, "taco truck"));
+    printf("%s\n", hc_bst_get(tree, "taco truck 2"));
+    printf("%s\n", hc_bst_get(tree, "musician"));
     hc_bst_destroy(&tree);
 }
