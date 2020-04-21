@@ -1,10 +1,10 @@
 #ifndef HC_BST_H
 #define HC_BST_H
 
-#include "hc_bst_node.h"
+#include "hc_node.h"
 
 typedef struct hc_bst {
-    hc_bst_node* root;
+    hc_node* root;
 } hc_bst;
 
 hc_bst* hc_bst_init();

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "hc_bst_node.h"
+#include "hc_node.h"
 
 int main() {
     hc_bst* tree = hc_bst_init();

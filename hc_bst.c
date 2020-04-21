@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "hc_bst_node.h"
+#include "hc_node.h"
 
 hc_bst* hc_bst_init() {
     hc_bst* tree = malloc(sizeof(hc_bst));
@@ -12,10 +12,10 @@ hc_bst* hc_bst_init() {
     return tree;
 }
 
-static void hc_bst_insert_worker(hc_bst_node** nref, const char* k,
+static void hc_bst_insert_worker(hc_node** nref, const char* k,
                                  const char* v) {
     if (*nref == NULL) {
-        *nref = hc_bst_node_init(k, v);
+        *nref = hc_node_init(k, v);
         return;
     }
 
@@ -33,7 +33,7 @@ void hc_bst_insert(hc_bst* t, const char* k, const char* v) {
     hc_bst_insert_worker(&t->root, k, v);
 }
 
-static const char* hc_bst_get_worker(hc_bst_node* n, const char* k) {
+static const char* hc_bst_get_worker(hc_node* n, const char* k) {
     if (n == NULL) return NULL;
 
     int cmp_res = strcmp(k, n->key);
@@ -50,7 +50,7 @@ const char* hc_bst_get(hc_bst* t, const char* k) {
     return hc_bst_get_worker(t->root, k);
 }
 
-static void hc_bst_print_worker(hc_bst_node* n, const char* node_addr) {
+static void hc_bst_print_worker(hc_node* n, const char* node_addr) {
     if (n == NULL) return;
 
     printf("Node: %s\n", node_addr);
@@ -77,7 +77,7 @@ static void hc_bst_print_worker(hc_bst_node* n, const char* node_addr) {
 void hc_bst_print(hc_bst* t) { hc_bst_print_worker(t->root, "root"); }
 
 void hc_bst_destroy(hc_bst** t) {
-    hc_bst_node_destroy(&(*t)->root);
+    hc_node_destroy(&(*t)->root);
     free(*t);
     *t = NULL;
 }
