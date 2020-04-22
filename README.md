@@ -39,4 +39,4 @@ the given key `k` is `NULL`.
 Print the contents of a BST `t`.
 
 ## Addendum
-Deletion, traversal, and other things are still to be implemented.
+Deletion, breadth-first traversal, and other things are still to be implemented.
