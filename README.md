@@ -18,6 +18,16 @@ Destroy a BST.
 
 Insert into a BST `t` a node with key `k` and value `v`.
 
+### `hc_bst_traverse(hc_bst* t, int order_flag) -> void`
+
+Traverse the given tree `t` and print each node's key and value along the way.
+
+Pass `order_flag` as `-1` to execute pre-order traversal.
+Pass `order_flag` as `0` to execute in-order traversal.
+Pass `order_flag` as `1` to execute post-order traversal.
+
+Any other `order_flag` value will result in in the function doing nothing.
+
 ### `hc_bst_get(hc_bst* t, const char* k) -> const char* v`
 
 Returns the value `v` for the node with key `k` in the tree `t`. If the tree `t` does not

@@ -10,6 +10,8 @@ typedef struct hc_node {
 
 hc_node* hc_node_init(const char* k, const char* v);
 
+void hc_node_print(hc_node* n);
+
 void hc_node_destroy(hc_node** n);
 
 #endif

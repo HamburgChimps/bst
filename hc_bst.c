@@ -4,16 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "hc_node.h"
-
 hc_bst* hc_bst_init() {
     hc_bst* tree = malloc(sizeof(hc_bst));
     tree->root = NULL;
     return tree;
 }
 
-static void hc_bst_insert_worker(hc_node** nref, const char* k,
-                                 const char* v) {
+static void hc_bst_insert_worker(hc_node** nref, const char* k, const char* v) {
     if (*nref == NULL) {
         *nref = hc_node_init(k, v);
         return;
@@ -50,12 +47,44 @@ const char* hc_bst_get(hc_bst* t, const char* k) {
     return hc_bst_get_worker(t->root, k);
 }
 
+static void hc_bst_traverse_pre_order(hc_node* n) {
+    if (n == NULL) return;
+
+    hc_node_print(n);
+    hc_bst_traverse_pre_order(n->left);
+    hc_bst_traverse_pre_order(n->right);
+}
+
+static void hc_bst_traverse_in_order(hc_node* n) {
+    if (n == NULL) return;
+
+    hc_bst_traverse_in_order(n->left);
+    hc_node_print(n);
+    hc_bst_traverse_in_order(n->right);
+}
+
+static void hc_bst_traverse_post_order(hc_node* n) {
+    if (n == NULL) return;
+
+    hc_bst_traverse_post_order(n->left);
+    hc_bst_traverse_post_order(n->right);
+    hc_node_print(n);
+}
+
+// TODO: Perhaps traverse should also return an
+//       array of elements in the order they were traversed?
+void hc_bst_traverse(hc_bst* t, int order_flag) {
+    if (t->root == NULL) return;
+    if (order_flag == -1) return hc_bst_traverse_pre_order(t->root);
+    if (order_flag == 0) return hc_bst_traverse_in_order(t->root);
+    if (order_flag == 1) return hc_bst_traverse_post_order(t->root);
+}
+
 static void hc_bst_print_worker(hc_node* n, const char* node_addr) {
     if (n == NULL) return;
 
     printf("Node: %s\n", node_addr);
-    printf("Key: %s\n", n->key);
-    printf("Value %s\n", n->value);
+    hc_node_print(n);
     printf("\n\n");
     fflush(stdout);
 

@@ -1,5 +1,6 @@
 #include "hc_node.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 hc_node* hc_node_init(const char* k, const char* v) {
@@ -11,6 +12,13 @@ hc_node* hc_node_init(const char* k, const char* v) {
     node->value = v;
 
     return node;
+}
+
+void hc_node_print(hc_node* n) {
+    printf("\n----------------------------------------------\n");
+    printf("Key: %s\n", n->key);
+    printf("Value: %s", n->value);
+    printf("\n----------------------------------------------\n");
 }
 
 void hc_node_destroy(hc_node** n) {
