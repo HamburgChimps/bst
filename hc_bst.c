@@ -30,13 +30,13 @@ void hc_bst_insert(hc_bst* t, const char* k, const char* v) {
     hc_bst_insert_worker(&t->root, k, v);
 }
 
-static const char* hc_bst_get_worker(hc_node* n, const char* k) {
-    if (n == NULL) return NULL;
+static hc_node** hc_bst_get_worker(hc_node** n, const char* k) {
+    if (*n == NULL) return NULL;
 
-    int cmp_res = strcmp(k, n->key);
-    if (cmp_res == 0) return n->value;
-    if (cmp_res < 0) return hc_bst_get_worker(n->left, k);
-    if (cmp_res > 0) return hc_bst_get_worker(n->right, k);
+    int cmp_res = strcmp(k, (*n)->key);
+    if (cmp_res == 0) return n;
+    if (cmp_res < 0) return hc_bst_get_worker(&(*n)->left, k);
+    if (cmp_res > 0) return hc_bst_get_worker(&(*n)->right, k);
 
     return NULL;
 }
@@ -44,7 +44,10 @@ static const char* hc_bst_get_worker(hc_node* n, const char* k) {
 const char* hc_bst_get(hc_bst* t, const char* k) {
     if (k == NULL) return NULL;
 
-    return hc_bst_get_worker(t->root, k);
+    hc_node** n = hc_bst_get_worker(&t->root, k);
+
+    if (*n == NULL) return NULL;
+    return (*n)->value;
 }
 
 static void hc_bst_traverse_pre_order(hc_node* n) {
@@ -78,6 +81,26 @@ void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (order_flag == -1) return hc_bst_traverse_pre_order(t->root);
     if (order_flag == 0) return hc_bst_traverse_in_order(t->root);
     if (order_flag == 1) return hc_bst_traverse_post_order(t->root);
+}
+
+void hc_bst_delete_key(hc_bst* t, const char* k) {
+    hc_node** n = hc_bst_get_worker(&t->root, k);
+
+    if ((*n) == NULL) return;
+    if ((*n)->left == NULL && (*n)->right == NULL) {
+        return hc_node_destroy(n);
+    }
+    if ((*n)->left == NULL && (*n)->right != NULL) {
+        free(*n);
+        *n = (*n)->right;
+        return;
+    }
+
+    if ((*n)->left != NULL && (*n)->right == NULL) {
+        free(*n);
+        *n = (*n)->left;
+        return;
+    }
 }
 
 static void hc_bst_print_worker(hc_node* n, const char* node_addr) {

@@ -15,6 +15,8 @@ const char* hc_bst_get(hc_bst* t, const char* k);
 
 void hc_bst_traverse(hc_bst* t, int order_flag);
 
+void hc_bst_delete_key(hc_bst* t, const char* k);
+
 void hc_bst_print(hc_bst* t);
 
 void hc_bst_destroy(hc_bst** t);
