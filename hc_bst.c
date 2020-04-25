@@ -10,19 +10,19 @@ hc_bst* hc_bst_init() {
     return tree;
 }
 
-static void hc_bst_insert_worker(hc_node** nref, const char* k, const char* v) {
-    if (*nref == NULL) {
-        *nref = hc_node_init(k, v);
+static void hc_bst_insert_worker(hc_node** n, const char* k, const char* v) {
+    if (*n == NULL) {
+        *n = hc_node_init(k, v);
         return;
     }
 
-    int cmp_res = strcmp(k, (*nref)->key);
+    int cmp_res = strcmp(k, (*n)->key);
     if (cmp_res < 0) {
-        return hc_bst_insert_worker(&(*nref)->left, k, v);
+        return hc_bst_insert_worker(&(*n)->left, k, v);
     }
 
     if (cmp_res > 0) {
-        return hc_bst_insert_worker(&(*nref)->right, k, v);
+        return hc_bst_insert_worker(&(*n)->right, k, v);
     }
 }
 
