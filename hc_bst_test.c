@@ -9,14 +9,11 @@ int main() {
 
     assert(tree->root == NULL);
 
-    hc_bst_insert(tree, "actor", "hugh jackman");
-    hc_bst_insert(tree, "musician", "david guetta");
-    hc_bst_insert(tree, "abolitionist", "William Lloyd Garrison");
-    hc_bst_insert(tree, "aardvark", "Arthur");
+    hc_bst_insert(tree, "b", NULL);
+    hc_bst_insert(tree, "a", NULL);
+    hc_bst_insert(tree, "c", NULL);
 
-    hc_bst_delete_key(tree, "abolitionist");
-
-    hc_bst_print(tree);
+    hc_bst_delete_key(tree, "b");
 
     hc_bst_destroy(&tree);
 }

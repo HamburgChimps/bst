@@ -83,6 +83,21 @@ void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (order_flag == 1) return hc_bst_traverse_post_order(t->root);
 }
 
+static hc_node** get_in_order_successor_worker(hc_node** n) {
+    if ((*n)->left == NULL) return n;
+
+    return get_in_order_successor_worker(n);
+}
+
+static hc_node** get_in_order_successor(hc_node** n) {
+    if (*n == NULL) return NULL;
+    if ((*n)->right == NULL) return NULL;
+
+    return get_in_order_successor_worker(&(*n)->right);
+}
+
+static int is_leaf(hc_node* n) { return n->left == NULL && n->right == NULL; }
+
 void hc_bst_delete_key(hc_bst* t, const char* k) {
     hc_node** n = hc_bst_get_worker(&t->root, k);
 
@@ -92,17 +107,34 @@ void hc_bst_delete_key(hc_bst* t, const char* k) {
     }
     if ((*n)->left == NULL && (*n)->right != NULL) {
         free(*n);
+        if (*n == t->root) {
+            t->root = (*n)->right;
+        }
         *n = (*n)->right;
-        t->root = *n;
         return;
     }
 
     if ((*n)->left != NULL && (*n)->right == NULL) {
         free(*n);
+        if (*n == t->root) {
+            t->root = (*n)->right;
+        }
         *n = (*n)->left;
-        t->root = *n;
         return;
     }
+
+    hc_node** s = get_in_order_successor(n);
+    (*n)->key = (*s)->key;
+    (*n)->value = (*s)->value;
+
+    if (is_leaf(*s)) {
+        hc_node_destroy(s);
+        printf("%p\n", s);
+        printf("%p\n", *s);
+        return;
+    }
+
+    // TODO: Handle case where node has one child
 }
 
 static void hc_bst_print_worker(hc_node* n, const char* node_addr) {
