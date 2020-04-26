@@ -36,6 +36,10 @@ Returns the value `v` for the node with key `k` in the tree `t`. If the tree `t`
 contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
 the given key `k` is `NULL`.
 
+### `hc_bst_delete_key(hc_bst* t, const char* k) -> void`
+
+Deletes the node with key `k` in the tree `t`, if it exists.
+
 ### `hc_bst_print(hc_bst* t) -> void`
 
 Print the contents of a BST `t`.
