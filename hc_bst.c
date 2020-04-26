@@ -93,12 +93,14 @@ void hc_bst_delete_key(hc_bst* t, const char* k) {
     if ((*n)->left == NULL && (*n)->right != NULL) {
         free(*n);
         *n = (*n)->right;
+        t->root = *n;
         return;
     }
 
     if ((*n)->left != NULL && (*n)->right == NULL) {
         free(*n);
         *n = (*n)->left;
+        t->root = *n;
         return;
     }
 }
