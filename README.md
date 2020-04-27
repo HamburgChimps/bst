@@ -32,7 +32,7 @@ Pass `order_flag` as `1` to execute post-order traversal.
 
 Any other `order_flag` value will result in in the function doing nothing.
 
-# `int hc_bst_get_height(hc_bst* t) -> int`
+### `int hc_bst_get_height(hc_bst* t) -> int`
 
 Get the height of the given tree `t`.
 
