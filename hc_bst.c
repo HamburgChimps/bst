@@ -46,7 +46,7 @@ const char* hc_bst_get(hc_bst* t, const char* k) {
 
     hc_node** n = hc_bst_get_worker(&t->root, k);
 
-    if (*n == NULL) return NULL;
+    if (n == NULL) return NULL;
     return (*n)->value;
 }
 
@@ -101,7 +101,7 @@ static int is_leaf(hc_node* n) { return n->left == NULL && n->right == NULL; }
 void hc_bst_delete_key(hc_bst* t, const char* k) {
     hc_node** n = hc_bst_get_worker(&t->root, k);
 
-    if ((*n) == NULL) return;
+    if (n == NULL) return;
     if ((*n)->left == NULL && (*n)->right == NULL) {
         return hc_node_destroy(n);
     }

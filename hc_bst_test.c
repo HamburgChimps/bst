@@ -11,12 +11,13 @@ int main() {
 
     hc_bst_insert(tree, "m", NULL);
     hc_bst_insert(tree, "a", NULL);
-    hc_bst_insert(tree, "z", NULL);
+    hc_bst_insert(tree, "y", NULL);
     hc_bst_insert(tree, "o", NULL);
-    hc_bst_insert(tree, "q", NULL);
-    hc_bst_insert(tree, "p", NULL);
+    hc_bst_insert(tree, "z", NULL);
 
-    hc_bst_print(tree);
+    // hc_bst_print(tree);
+
+    hc_bst_get(tree, "p");
 
     hc_bst_destroy(&tree);
 }
