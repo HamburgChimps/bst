@@ -15,9 +15,13 @@ int main() {
     hc_bst_insert(tree, "o", NULL);
     hc_bst_insert(tree, "z", NULL);
 
-    // hc_bst_print(tree);
+    hc_bst_print(tree);
 
-    hc_bst_get(tree, "p");
+    hc_bst_delete_key(tree, "y");
+
+    printf("\n\n\n===============================\n\n\n");
+
+    hc_bst_print(tree);
 
     hc_bst_destroy(&tree);
 }
