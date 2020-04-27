@@ -45,4 +45,4 @@ Deletes the node with key `k` in the tree `t`, if it exists.
 Print the contents of a BST `t`.
 
 ## Addendum
-Deletion, breadth-first traversal, and other things are still to be implemented.
+Breadth-first traversal still to be implemented.

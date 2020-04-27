@@ -129,12 +129,20 @@ void hc_bst_delete_key(hc_bst* t, const char* k) {
 
     if (is_leaf(*s)) {
         hc_node_destroy(s);
-        printf("%p\n", s);
-        printf("%p\n", *s);
         return;
     }
 
-    // TODO: Handle case where node has one child
+    if ((*s)->left != NULL) {
+        free(*s);
+        *s = (*s)->left;
+        return;
+    }
+
+    if ((*s)->right != NULL) {
+        free(*s);
+        *s = (*s)->right;
+        return;
+    }
 }
 
 static void hc_bst_print_worker(hc_node* n, const char* node_addr) {
