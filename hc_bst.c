@@ -74,26 +74,9 @@ static void hc_bst_traverse_post_order(hc_node* n) {
     hc_node_print(n);
 }
 
-static int get_height(hc_node* n, int h) {
-    if (n == NULL) return h;
-
-    ++h;
-
-    int height_left = get_height(n->left, h);
-    int height_right = get_height(n->right, h);
-
-    if (height_left > height_right || height_left == height_right) {
-        return height_left;
-    }
-
-    return height_right;
-}
-
 static void hc_bst_traverse_level_order_worker(hc_node* n, int h) {}
 
-static void hc_bst_traverse_level_order(hc_node* n) {
-    int height = get_height(n, 0);
-}
+static void hc_bst_traverse_level_order(hc_node* n) {}
 
 void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (t->root == NULL) return;
@@ -117,6 +100,23 @@ static hc_node** get_in_order_successor(hc_node** n) {
 }
 
 static int is_leaf(hc_node* n) { return n->left == NULL && n->right == NULL; }
+
+static int get_height_worker(hc_node* n, int h) {
+    if (n == NULL) return h;
+
+    ++h;
+
+    int height_left = get_height_worker(n->left, h);
+    int height_right = get_height_worker(n->right, h);
+
+    if (height_left > height_right || height_left == height_right) {
+        return height_left;
+    }
+
+    return height_right;
+}
+
+int hc_bst_get_height(hc_bst* t) { return get_height_worker(t->root, 0); }
 
 void hc_bst_delete_key(hc_bst* t, const char* k) {
     hc_node** n = hc_bst_get_worker(&t->root, k);

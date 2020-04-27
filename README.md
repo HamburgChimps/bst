@@ -10,13 +10,15 @@ For demonstration purposes, this repo contains a test harness and a Makefile to 
 
 Initialize a BST for usage.
 
-### `hc_bst_destroy(hc_bst**) -> void`
-
-Destroy a BST.
-
 ### `hc_bst_insert(hc_bst* t, const char* k, const char* v) -> void`
 
 Insert into a BST `t` a node with key `k` and value `v`.
+
+### `hc_bst_get(hc_bst* t, const char* k) -> const char* v`
+
+Returns the value `v` for the node with key `k` in the tree `t`. If the tree `t` does not
+contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
+the given key `k` is `NULL`.
 
 ### `hc_bst_traverse(hc_bst* t, int order_flag) -> void`
 
@@ -30,11 +32,9 @@ Pass `order_flag` as `1` to execute post-order traversal.
 
 Any other `order_flag` value will result in in the function doing nothing.
 
-### `hc_bst_get(hc_bst* t, const char* k) -> const char* v`
+# `int hc_bst_get_height(hc_bst* t) -> int`
 
-Returns the value `v` for the node with key `k` in the tree `t`. If the tree `t` does not
-contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
-the given key `k` is `NULL`.
+Get the height of the given tree `t`.
 
 ### `hc_bst_delete_key(hc_bst* t, const char* k) -> void`
 
@@ -43,6 +43,10 @@ Deletes the node with key `k` in the tree `t`, if it exists.
 ### `hc_bst_print(hc_bst* t) -> void`
 
 Print the contents of a BST `t`.
+
+### `hc_bst_destroy(hc_bst**) -> void`
+
+Destroy a BST.
 
 ## Addendum
 Breadth-first traversal still to be implemented.
