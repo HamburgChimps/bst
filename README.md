@@ -44,9 +44,9 @@ Deletes the node with key `k` in the tree `t`, if it exists.
 
 Print the contents of a BST `t`.
 
-### `hc_bst_destroy(hc_bst**) -> void`
+### `hc_bst_destroy(hc_bst** t) -> void`
 
-Destroy a BST.
+Destroy the given tree `t`.
 
 ## Addendum
 Breadth-first traversal still to be implemented.
