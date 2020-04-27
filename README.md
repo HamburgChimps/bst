@@ -28,8 +28,6 @@ Pass `order_flag` as `0` to execute in-order traversal.
 
 Pass `order_flag` as `1` to execute post-order traversal.
 
-Pass `order_flag` as `2` to execute level-order (breadth-first) traversal.
-
 Any other `order_flag` value will result in in the function doing nothing.
 
 ### `hc_bst_get(hc_bst* t, const char* k) -> const char* v`

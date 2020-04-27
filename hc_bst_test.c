@@ -20,7 +20,7 @@ int main() {
     hc_bst_insert(tree, "e", NULL);
     hc_bst_insert(tree, "f", NULL);
 
-    hc_bst_traverse(tree, 2);
+    hc_bst_traverse(tree, 0);
 
     // hc_bst_print(tree);
 
