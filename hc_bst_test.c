@@ -14,14 +14,21 @@ int main() {
     hc_bst_insert(tree, "y", NULL);
     hc_bst_insert(tree, "o", NULL);
     hc_bst_insert(tree, "z", NULL);
+    hc_bst_insert(tree, "b", NULL);
+    hc_bst_insert(tree, "c", NULL);
+    hc_bst_insert(tree, "d", NULL);
+    hc_bst_insert(tree, "e", NULL);
+    hc_bst_insert(tree, "f", NULL);
 
-    hc_bst_print(tree);
+    hc_bst_traverse(tree, 2);
 
-    hc_bst_delete_key(tree, "y");
+    // hc_bst_print(tree);
 
-    printf("\n\n\n===============================\n\n\n");
+    // hc_bst_delete_key(tree, "y");
 
-    hc_bst_print(tree);
+    // printf("\n\n\n===============================\n\n\n");
+
+    // hc_bst_print(tree);
 
     hc_bst_destroy(&tree);
 }
