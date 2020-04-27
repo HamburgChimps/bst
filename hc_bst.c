@@ -74,8 +74,6 @@ static void hc_bst_traverse_post_order(hc_node* n) {
     hc_node_print(n);
 }
 
-// TODO: Perhaps traverse should also return an
-//       array of elements in the order they were traversed?
 void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (t->root == NULL) return;
     if (order_flag == -1) return hc_bst_traverse_pre_order(t->root);
