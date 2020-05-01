@@ -4,6 +4,41 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct hc_node {
+    struct hc_node* left;
+    struct hc_node* right;
+    const char* key;
+    const char* value;
+} hc_node;
+
+static hc_node* hc_node_init(const char* k, const char* v) {
+    hc_node* node = malloc(sizeof(hc_node));
+    node->left = NULL;
+    node->right = NULL;
+
+    node->key = k;
+    node->value = v;
+
+    return node;
+}
+
+static void hc_node_print(hc_node* n) {
+    printf("\n----------------------------------------------\n");
+    printf("Key: %s\n", n->key);
+    printf("Value: %s", n->value);
+    printf("\n----------------------------------------------\n");
+}
+
+static void hc_node_destroy(hc_node** n) {
+    if (*n == NULL) return;
+
+    if ((*n)->left != NULL) hc_node_destroy(&(*n)->left);
+    if ((*n)->right != NULL) hc_node_destroy(&(*n)->right);
+
+    free(*n);
+    *n = NULL;
+}
+
 hc_bst* hc_bst_init() {
     hc_bst* tree = malloc(sizeof(hc_bst));
     tree->root = NULL;
