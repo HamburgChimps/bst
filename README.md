@@ -49,6 +49,3 @@ Print the contents of a BST `t`.
 ### `hc_bst_destroy(hc_bst** t) -> void`
 
 Destroy the given tree `t`.
-
-## Addendum
-Breadth-first traversal still to be implemented.
