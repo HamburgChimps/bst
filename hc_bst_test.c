@@ -17,15 +17,14 @@ int main() {
     for (int i = 0; i < TEST_KEYS_SIZE; ++i)
         hc_bst_insert(tree, test_keys[i], NULL);
 
+    hc_bst_traverse(tree, -1);
+    hc_bst_traverse(tree, 0);
+    hc_bst_traverse(tree, 1);
     hc_bst_traverse(tree, 2);
 
-    // hc_bst_print(tree);
+    hc_bst_delete_key(tree, "y");
 
-    // hc_bst_delete_key(tree, "y");
-
-    // printf("\n\n\n===============================\n\n\n");
-
-    // hc_bst_print(tree);
+    hc_bst_print(tree);
 
     hc_bst_destroy(&tree);
 }
