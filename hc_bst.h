@@ -1,6 +1,8 @@
 #ifndef HC_BST_H
 #define HC_BST_H
 
+#include "include/hc_q.h"
+
 typedef struct hc_bst {
     struct hc_node* root;
 } hc_bst;

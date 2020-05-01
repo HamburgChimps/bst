@@ -109,8 +109,6 @@ static void hc_bst_traverse_post_order(hc_node* n) {
     hc_node_print(n);
 }
 
-static void hc_bst_traverse_level_order_worker(hc_node* n, int h) {}
-
 static void hc_bst_traverse_level_order(hc_node* n) {}
 
 void hc_bst_traverse(hc_bst* t, int order_flag) {
@@ -118,7 +116,7 @@ void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (order_flag == -1) return hc_bst_traverse_pre_order(t->root);
     if (order_flag == 0) return hc_bst_traverse_in_order(t->root);
     if (order_flag == 1) return hc_bst_traverse_post_order(t->root);
-    // if (order_flag == 2) return hc_bst_traverse_level_order(t->root);
+    if (order_flag == 2) return hc_bst_traverse_level_order(t->root);
 }
 
 static hc_node** get_in_order_successor_worker(hc_node** n) {
