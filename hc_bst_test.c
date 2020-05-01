@@ -4,25 +4,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TEST_KEYS_SIZE 10
+
 int main() {
     hc_bst* tree = hc_bst_init();
 
     assert(tree->root == NULL);
 
-    hc_bst_insert(tree, "m", NULL);
-    hc_bst_insert(tree, "a", NULL);
-    hc_bst_insert(tree, "y", NULL);
-    hc_bst_insert(tree, "o", NULL);
-    hc_bst_insert(tree, "z", NULL);
-    hc_bst_insert(tree, "b", NULL);
-    hc_bst_insert(tree, "c", NULL);
-    hc_bst_insert(tree, "d", NULL);
-    hc_bst_insert(tree, "e", NULL);
-    hc_bst_insert(tree, "f", NULL);
+    const char* test_keys[TEST_KEYS_SIZE] = {"m", "a", "y", "o", "z",
+                                       "b", "c", "d", "e", "f"};
+
+    for (int i = 0; i < TEST_KEYS_SIZE; ++i)
+        hc_bst_insert(tree, test_keys[i], NULL);
 
     printf("%i\n", hc_bst_get_height(tree));
 
-    // hc_bst_print(tree);
+    hc_bst_print(tree);
 
     // hc_bst_delete_key(tree, "y");
 
