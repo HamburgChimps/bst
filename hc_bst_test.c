@@ -12,14 +12,14 @@ int main() {
     assert(tree->root == NULL);
 
     const char* test_keys[TEST_KEYS_SIZE] = {"m", "a", "y", "o", "z",
-                                       "b", "c", "d", "e", "f"};
+                                             "b", "c", "d", "e", "f"};
 
     for (int i = 0; i < TEST_KEYS_SIZE; ++i)
         hc_bst_insert(tree, test_keys[i], NULL);
 
-    printf("%i\n", hc_bst_get_height(tree));
+    hc_bst_traverse(tree, 2);
 
-    hc_bst_print(tree);
+    // hc_bst_print(tree);
 
     // hc_bst_delete_key(tree, "y");
 

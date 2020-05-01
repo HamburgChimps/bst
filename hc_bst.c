@@ -109,7 +109,20 @@ static void hc_bst_traverse_post_order(hc_node* n) {
     hc_node_print(n);
 }
 
-static void hc_bst_traverse_level_order(hc_node* n) {}
+static void hc_bst_traverse_level_order(hc_node* n) {
+    hc_q* traversal_queue = hc_q_init(5);
+    hc_q_enqueue(traversal_queue, n);
+
+    hc_node* visitor = NULL;
+
+    while ((visitor = (hc_node*)hc_q_dequeue(traversal_queue))) {
+        hc_node_print(visitor);
+        if (visitor->left) hc_q_enqueue(traversal_queue, visitor->left);
+        if (visitor->right) hc_q_enqueue(traversal_queue, visitor->right);
+    }
+
+    hc_q_destroy(&traversal_queue);
+}
 
 void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (t->root == NULL) return;
