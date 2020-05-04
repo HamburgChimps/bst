@@ -1,6 +1,11 @@
+INCLUDE=./include
+DEPS=$(wildcard ./deps/*.c)
+
+.PHONY=clean
+
 all:
-	gcc -o hc_bst_test \
-		include/hc-q/hc_q.c \
+	gcc -I $(INCLUDE) -o hc_bst_test \
+		$(DEPS) \
 		hc_bst_test.c \
 		hc_bst.c
 
