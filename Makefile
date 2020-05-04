@@ -1,13 +1,14 @@
 INCLUDE=./include
 DEPS=$(wildcard ./deps/*.c)
+OBJ=hc_bst_test
+SRC=$(wildcard ./src/*.c)
 
 .PHONY=clean
 
 all:
-	gcc -I $(INCLUDE) -o hc_bst_test \
+	gcc -I $(INCLUDE) -o $(OBJ) \
 		$(DEPS) \
-		hc_bst_test.c \
-		hc_bst.c
+		$(SRC)
 
 clean:
-	rm -rf hc_bst_test
+	rm -rf $(OBJ)
