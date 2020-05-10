@@ -1,6 +1,6 @@
 # The HamburgChimps Binary Search Tree
 
-A reference implementation of a binary search tree in c.
+An implementation of a binary search tree in c.
 
 For demonstration purposes, this repo contains a test harness and a Makefile to compile and link the BST implementation and test harness. You can then execute the test harness with `/.hc_bst_test`. This assumes an OS with `make` and `gcc`. 
 
