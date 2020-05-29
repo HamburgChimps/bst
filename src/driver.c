@@ -1,9 +1,9 @@
-#include "hc_bst.h"
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "hc_bst.h"
 
 #define TEST_KEYS_SIZE 10
 
@@ -38,7 +38,7 @@ int main() {
     hc_bst_delete_key(tree, "y");
 
     printf("\n\n================ Final State of Tree ================\n");
-    hc_bst_print(tree);
+    hc_bst_print(tree, NULL);
 
     hc_bst_destroy(&tree);
 }

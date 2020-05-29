@@ -42,9 +42,12 @@ Get the height of the given tree `t`.
 
 Deletes the node with key `k` in the tree `t`, if it exists.
 
-### `hc_bst_print(hc_bst* t) -> void`
+### `hc_bst_print(hc_bst* t, void (*node_printer)(struct node*)) -> void`
 
 Print the contents of a BST `t`.
+
+Pass a `node_printer` function pointer to override the way individual tree nodes are printed.
+Pass `NULL` as the second argument to use the default tree node printing behavior.
 
 ### `hc_bst_destroy(hc_bst** t) -> void`
 
