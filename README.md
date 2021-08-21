@@ -20,6 +20,12 @@ Returns the value `v` for the node with key `k` in the tree `t`. If the tree `t`
 contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
 the given key `k` is `NULL`.
 
+### `hc_bst_get_node(hc_bst* t, const char* k) -> node**`
+
+Returns the node containing the key `k` in the tree `t`. If the tree `t` does not
+contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
+the given key `k` is `NULL`.
+
 ### `hc_bst_traverse(hc_bst* t, int order_flag) -> void`
 
 Traverse the given tree `t` in the order indicated by `order_flag` and print each node's key and value along the way.

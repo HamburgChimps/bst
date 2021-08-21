@@ -25,6 +25,7 @@ int main() {
 
     assert(hc_bst_get_height(tree) == 7);
     assert(hc_bst_get(tree, "z") == "zebra");
+    assert((*hc_bst_get_node(tree, "z"))->value == "zebra");
 
     printf("\n\n================ Pre-Order Traversal ================\n");
     hc_bst_traverse(tree, -1);

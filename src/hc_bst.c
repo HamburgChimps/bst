@@ -4,15 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node {
-    struct node* left;
-    struct node* right;
-    const char* key;
-    const char* value;
-} node;
-
-static node* node_init(const char* k, const char* v) {
-    node* n = malloc(sizeof(node));
+static hc_bst_node* node_init(const char* k, const char* v) {
+    hc_bst_node* n = malloc(sizeof(hc_bst_node));
     n->left = NULL;
     n->right = NULL;
 
@@ -22,14 +15,14 @@ static node* node_init(const char* k, const char* v) {
     return n;
 }
 
-static void node_print(node* n) {
+static void node_print(hc_bst_node* n) {
     printf("\n----------------------------------------------\n");
     printf("Key: %s\n", n->key);
     printf("Value: %s", n->value);
     printf("\n----------------------------------------------\n");
 }
 
-static void node_destroy(node** n) {
+static void node_destroy(hc_bst_node** n) {
     if (*n == NULL) return;
 
     if ((*n)->left != NULL) node_destroy(&(*n)->left);
@@ -45,7 +38,7 @@ hc_bst* hc_bst_init() {
     return tree;
 }
 
-static void hc_bst_insert_worker(node** n, const char* k, const char* v) {
+static void hc_bst_insert_worker(hc_bst_node** n, const char* k, const char* v) {
     if (*n == NULL) {
         *n = node_init(k, v);
         return;
@@ -65,7 +58,7 @@ void hc_bst_insert(hc_bst* t, const char* k, const char* v) {
     hc_bst_insert_worker(&t->root, k, v);
 }
 
-static node** hc_bst_get_worker(node** n, const char* k) {
+static hc_bst_node** hc_bst_get_worker(hc_bst_node** n, const char* k) {
     if (*n == NULL) return NULL;
 
     int cmp_res = strcmp(k, (*n)->key);
@@ -79,13 +72,22 @@ static node** hc_bst_get_worker(node** n, const char* k) {
 const char* hc_bst_get(hc_bst* t, const char* k) {
     if (k == NULL) return NULL;
 
-    node** n = hc_bst_get_worker(&t->root, k);
+    hc_bst_node** n = hc_bst_get_worker(&t->root, k);
 
     if (n == NULL) return NULL;
     return (*n)->value;
 }
 
-static void hc_bst_traverse_pre_order(node* n) {
+hc_bst_node** hc_bst_get_node(hc_bst* t, const char* k) {
+    if (k == NULL) return NULL;
+
+    hc_bst_node** n = hc_bst_get_worker(&t->root, k);
+
+    if (n == NULL) return NULL;
+    return n;
+}
+
+static void hc_bst_traverse_pre_order(hc_bst_node* n) {
     if (n == NULL) return;
 
     node_print(n);
@@ -93,7 +95,7 @@ static void hc_bst_traverse_pre_order(node* n) {
     hc_bst_traverse_pre_order(n->right);
 }
 
-static void hc_bst_traverse_in_order(node* n) {
+static void hc_bst_traverse_in_order(hc_bst_node* n) {
     if (n == NULL) return;
 
     hc_bst_traverse_in_order(n->left);
@@ -101,7 +103,7 @@ static void hc_bst_traverse_in_order(node* n) {
     hc_bst_traverse_in_order(n->right);
 }
 
-static void hc_bst_traverse_post_order(node* n) {
+static void hc_bst_traverse_post_order(hc_bst_node* n) {
     if (n == NULL) return;
 
     hc_bst_traverse_post_order(n->left);
@@ -109,13 +111,13 @@ static void hc_bst_traverse_post_order(node* n) {
     node_print(n);
 }
 
-static void hc_bst_traverse_level_order(node* n) {
+static void hc_bst_traverse_level_order(hc_bst_node* n) {
     hc_q* traversal_queue = hc_q_init(5);
     hc_q_enqueue(traversal_queue, n);
 
-    node* visitor = NULL;
+    hc_bst_node* visitor = NULL;
 
-    while ((visitor = (node*)hc_q_dequeue(traversal_queue))) {
+    while ((visitor = (hc_bst_node*)hc_q_dequeue(traversal_queue))) {
         node_print(visitor);
         if (visitor->left) hc_q_enqueue(traversal_queue, visitor->left);
         if (visitor->right) hc_q_enqueue(traversal_queue, visitor->right);
@@ -132,22 +134,22 @@ void hc_bst_traverse(hc_bst* t, int order_flag) {
     if (order_flag == 2) return hc_bst_traverse_level_order(t->root);
 }
 
-static node** get_in_order_successor_worker(node** n) {
+static hc_bst_node** get_in_order_successor_worker(hc_bst_node** n) {
     if ((*n)->left == NULL) return n;
 
     return get_in_order_successor_worker(n);
 }
 
-static node** get_in_order_successor(node** n) {
+static hc_bst_node** get_in_order_successor(hc_bst_node** n) {
     if (*n == NULL) return NULL;
     if ((*n)->right == NULL) return NULL;
 
     return get_in_order_successor_worker(&(*n)->right);
 }
 
-static int is_leaf(node* n) { return n->left == NULL && n->right == NULL; }
+static int is_leaf(hc_bst_node* n) { return n->left == NULL && n->right == NULL; }
 
-static int get_height_worker(node* n, int h) {
+static int get_height_worker(hc_bst_node* n, int h) {
     if (n == NULL) return h;
 
     ++h;
@@ -165,7 +167,7 @@ static int get_height_worker(node* n, int h) {
 int hc_bst_get_height(hc_bst* t) { return get_height_worker(t->root, 0); }
 
 void hc_bst_delete_key(hc_bst* t, const char* k) {
-    node** n = hc_bst_get_worker(&t->root, k);
+    hc_bst_node** n = hc_bst_get_worker(&t->root, k);
 
     if (n == NULL) return;
     if ((*n)->left == NULL && (*n)->right == NULL) {
@@ -189,7 +191,7 @@ void hc_bst_delete_key(hc_bst* t, const char* k) {
         return;
     }
 
-    node** s = get_in_order_successor(n);
+    hc_bst_node** s = get_in_order_successor(n);
     (*n)->key = (*s)->key;
     (*n)->value = (*s)->value;
 
@@ -211,8 +213,8 @@ void hc_bst_delete_key(hc_bst* t, const char* k) {
     }
 }
 
-static void hc_bst_print_worker(node* n, const char* node_addr,
-                                void (*node_printer)(node*)) {
+static void hc_bst_print_worker(hc_bst_node* n, const char* node_addr,
+                                void (*node_printer)(hc_bst_node*)) {
     if (n == NULL) return;
 
     printf("Node: %s\n", node_addr);
@@ -235,7 +237,7 @@ static void hc_bst_print_worker(node* n, const char* node_addr,
     right_node_addr = NULL;
 }
 
-void hc_bst_print(hc_bst* t, void (*node_printer)(node*)) {
+void hc_bst_print(hc_bst* t, void (*node_printer)(hc_bst_node*)) {
     if (node_printer == NULL) {
         hc_bst_print_worker(t->root, "root", node_print);
         return;
