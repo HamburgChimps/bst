@@ -16,6 +16,7 @@ typedef struct hc_bst {
 
 hc_bst* hc_bst_init();
 
+// TODO: handle duplicates
 void hc_bst_insert(hc_bst* t, const char* k, const char* v);
 
 const char* hc_bst_get(hc_bst* t, const char* k);
