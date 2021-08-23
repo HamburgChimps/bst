@@ -161,7 +161,7 @@ void hc_bst_delete_key(hc_bst* t, const char* k) {
     hc_bst_node** n = hc_bst_get_worker(&t->root, k);
 
     if (n == NULL) return;
-    if ((*n)->left == NULL && (*n)->right == NULL) {
+    if (is_leaf(*n)) {
         return node_destroy(n);
     }
     if ((*n)->left == NULL && (*n)->right != NULL) {
