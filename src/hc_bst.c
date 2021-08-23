@@ -78,15 +78,6 @@ const char* hc_bst_get(hc_bst* t, const char* k) {
     return (*n)->value;
 }
 
-hc_bst_node** hc_bst_get_node(hc_bst* t, const char* k) {
-    if (k == NULL) return NULL;
-
-    hc_bst_node** n = hc_bst_get_worker(&t->root, k);
-
-    if (n == NULL) return NULL;
-    return n;
-}
-
 static void hc_bst_traverse_pre_order(hc_bst_node* n) {
     if (n == NULL) return;
 
