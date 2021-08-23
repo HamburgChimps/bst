@@ -157,6 +157,7 @@ static int get_height_worker(hc_bst_node* n, int h) {
 
 int hc_bst_get_height(hc_bst* t) { return get_height_worker(t->root, 0); }
 
+// TODO: fix bug where deleting root node causes seg fault.
 void hc_bst_delete_key(hc_bst* t, const char* k) {
     hc_bst_node** n = hc_bst_get_worker(&t->root, k);
 

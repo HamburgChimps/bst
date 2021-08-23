@@ -36,6 +36,7 @@ int main() {
     hc_bst_traverse(tree, 2);
 
     hc_bst_delete_key(tree, "y");
+    hc_bst_delete_key(tree, "m");
 
     printf("\n\n================ Final State of Tree ================\n");
     hc_bst_print(tree);
