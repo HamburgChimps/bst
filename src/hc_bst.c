@@ -38,7 +38,8 @@ hc_bst* hc_bst_init() {
     return tree;
 }
 
-static void hc_bst_insert_worker(hc_bst_node** n, const char* k, const char* v) {
+static void hc_bst_insert_worker(hc_bst_node** n, const char* k,
+                                 const char* v) {
     if (*n == NULL) {
         *n = node_init(k, v);
         return;
@@ -128,7 +129,7 @@ void hc_bst_traverse(hc_bst* t, int order_flag) {
 static hc_bst_node** get_in_order_successor_worker(hc_bst_node** n) {
     if ((*n)->left == NULL) return n;
 
-    return get_in_order_successor_worker(n);
+    return get_in_order_successor_worker(&(*n)->left);
 }
 
 static hc_bst_node** get_in_order_successor(hc_bst_node** n) {
@@ -138,7 +139,9 @@ static hc_bst_node** get_in_order_successor(hc_bst_node** n) {
     return get_in_order_successor_worker(&(*n)->right);
 }
 
-static int is_leaf(hc_bst_node* n) { return n->left == NULL && n->right == NULL; }
+static int is_leaf(hc_bst_node* n) {
+    return n->left == NULL && n->right == NULL;
+}
 
 static int get_height_worker(hc_bst_node* n, int h) {
     if (n == NULL) return h;
@@ -157,7 +160,6 @@ static int get_height_worker(hc_bst_node* n, int h) {
 
 int hc_bst_get_height(hc_bst* t) { return get_height_worker(t->root, 0); }
 
-// TODO: fix bug where deleting root node causes seg fault.
 void hc_bst_delete_key(hc_bst* t, const char* k) {
     hc_bst_node** n = hc_bst_get_worker(&t->root, k);
 
@@ -228,9 +230,7 @@ static void hc_bst_print_worker(hc_bst_node* n, const char* node_addr) {
     right_node_addr = NULL;
 }
 
-void hc_bst_print(hc_bst* t) {
-    hc_bst_print_worker(t->root, "root");
-}
+void hc_bst_print(hc_bst* t) { hc_bst_print_worker(t->root, "root"); }
 
 void hc_bst_destroy(hc_bst** t) {
     node_destroy(&(*t)->root);
