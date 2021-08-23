@@ -20,12 +20,6 @@ Returns the value `v` for the node with key `k` in the tree `t`. If the tree `t`
 contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
 the given key `k` is `NULL`.
 
-### `hc_bst_get_node(hc_bst* t, const char* k) -> node**`
-
-Returns the node containing the key `k` in the tree `t`. If the tree `t` does not
-contain the key `k` then this function returns `NULL`. This function also returns `NULL` if
-the given key `k` is `NULL`.
-
 ### `hc_bst_traverse(hc_bst* t, int order_flag) -> void`
 
 Traverse the given tree `t` in the order indicated by `order_flag` and print each node's key and value along the way.
@@ -48,12 +42,9 @@ Get the height of the given tree `t`.
 
 Deletes the node with key `k` in the tree `t`, if it exists.
 
-### `hc_bst_print(hc_bst* t, void (*node_printer)(struct node*)) -> void`
+### `hc_bst_print(hc_bst* t) -> void`
 
 Print the contents of a BST `t`.
-
-Pass a `node_printer` function pointer to override the way individual tree nodes are printed.
-Pass `NULL` as the second argument to use the default tree node printing behavior.
 
 ### `hc_bst_destroy(hc_bst** t) -> void`
 
